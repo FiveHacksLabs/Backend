@@ -14,6 +14,11 @@ func PayBill(c *gin.Context) {
 		return
 	}
 
+	if payment.UserID == 0 || payment.RouteID == 0 || payment.TotalPrice == 0 || payment.ServiceFee == 0 || payment.MethodPaymentCode == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"status": gin.H{"code": 400, "message": "Invalid request"}})
+		return
+	}
+
 	if err := services.PayBill(payment); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"status": gin.H{"code": 500, "message": "Failed to process payment"}})
 		return
@@ -29,3 +34,4 @@ func PayBill(c *gin.Context) {
 		},
 	})
 }
+

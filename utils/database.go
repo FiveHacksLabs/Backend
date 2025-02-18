@@ -11,7 +11,7 @@ var DB *sql.DB
 
 func InitDB() {
 	var err error
-	DB, err = sql.Open("mysql", "root:@tcp(localhost:3306)/jatitrans")
+	DB, err = sql.Open("mysql", "root:@tcp(localhost:3306)/digital_banking")
 	if err != nil {
 		log.Fatal(err)
 	}
